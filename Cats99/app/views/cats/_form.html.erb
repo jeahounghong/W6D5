@@ -1,0 +1,60 @@
+
+<% if action == :edit %>
+  <%= action_url = cat_url(kat)%>
+<% else %>
+  <% action_url = cats_url %>
+<% end %>
+
+
+<form action="<%= action_url%>" method="post">
+    <% if action == :edit %>
+        <input type="hidden" name="_method" value="patch">
+    <% end %>
+        
+    <label>Name:
+        <input type = "text" name = "cat[name]" value="<%=kat.name%>">
+    </label>
+    <br />
+    
+    <label>Birth Date:
+        <input type = "date" name = "cat[birth_date]" value = "<% kat.birth_date%>"> 
+    </label>
+    <br />
+
+
+
+
+    <label>Color:
+        <select name = "cat[color]">
+            <option value="none" <%# kat.color ? "" : "selected"%> disabled hidden>
+                Select a color:
+            </option>
+            <option value="Black" <%# kat.color == "Black" ? "selected" : ""%>>Black</option>
+            <option value="Calico" <%# kat.color == "Calico" ? "selected" : ""%>>Calico</option>
+            <option value="White" <%# kat.color == "White" ? "selected" : ""%>>White</option>
+            <option value="Tabby" <%# kat.color == "White" ? "selected" : ""%>>Tabby</option>
+            <option value="Gray" <%# kat.color == "Gray" ? "selected" : ""%>>Gray</option>
+            <option value="Orange" <%# kat.color == "Orange" ? "selected" : ""%>>Orange</option>
+            <option value="Spotted" <%# kat.color == "Spotted" ? "selected" : ""%>>Spotted</option>
+            <option value="Other" <%# kat.color == "Other" ? "selected" : ""%>>Other</option>
+        </select>
+    </label>
+    <br />
+
+    <label>Sex:
+        <input type="radio" name="cat[sex]" value = "M" <%# kat.sex == "M" ? "checked" : ""%>>
+        <label>Male</label>
+        <input type="radio" name="cat[sex]" value = "F"  <%# kat.sex == "F" ? "checked" : ""%>>
+        <label>Female</label>
+    </label>
+    <br />
+
+    <label>Description:
+        <textarea rows = "5" cols="50" name="cat[description]">
+        <%# kat.description %>
+        </textarea>
+    </label>
+    <br />
+
+    <input type="submit" value="<%= action == :edit ? 'Update cat' : 'Add cat'%>">
+</form>

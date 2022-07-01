@@ -25,4 +25,9 @@ class Cat < ApplicationRecord
         return DateTime.now.year - self.birth_date.year
     end
 
+    def has_many :rental_requests, dependent: :destroy,
+        primary_key: :id,
+        foreign_key: :cat_id,
+        class_name: :CatRentalRequest
+
 end
